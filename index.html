@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+</head>
+<body>
+
+	<div class="container">
+	<form action="" id="jobTitlesForm">
+
+		<ol class="col-sm-6">
+			<li id="designerBool">
+				<h4>Does this job require design skills?</h4>
+				<div class="radio">
+					<label for="designerFalse">
+						<input name="designer" id="designerFalse" type="radio">
+						No
+					</label>
+				</div>
+				<div class="radio">
+					<label for="designerTrue">
+						<input name="designer" id="designerTrue" type="radio">
+						Yes
+					</label>
+				</div>
+			</li>
+			<li id="generalistLogic">
+				<h4>What is the nature of this role?</h4>
+				<div class="radio">
+					<label for="specialist">
+						<input name="generalist" id="specialist" type="radio">
+						Specialist
+					</label>
+				</div>
+				<div class="radio">
+					<label for="generalist">
+						<input name="generalist" id="generalist" type="radio">
+						Generalist
+					</label>
+				</div>
+			</li>
+			<li id="expLevel">
+				<h4>Does this job require design skills?</h4>
+				<div class="radio">
+					<label for="entryLevel">
+						<input value="Entry" name="level" id="entryLevel" type="radio">
+						Entry
+					</label>
+				</div>
+				<div class="radio">
+					<label for="midLevel">
+						<input value="Mid-Level" name="level" id="midLevel" type="radio">
+						Mid
+					</label>
+				</div>
+				<div class="radio">
+					<label for="seniorLevel">
+						<input value="Senior" name="level" id="seniorLevel" type="radio">
+						Senior
+					</label>
+				</div>
+			</li>
+			<li id="chooseSkillSet">
+				<h4>Select the skill set that best describes the role.</h4>
+
+				<select name="skillSetSelect" class="form-control" id="skillSetSelect">
+					<!-- List generated based on above selections -->
+				</select>
+
+			</li>
+		</ol>
+
+	</form>
+	</div>
+	<div class="container">
+
+		<div class="panel">
+			<span id="designerResult"></span>
+			<span id="expLevelResult"></span>
+			<span id="generalistResult"></span>
+			<span id="skillsResult"></span>
+		</div>
+
+	</div>
+
+	
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>
