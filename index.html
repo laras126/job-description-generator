@@ -3,91 +3,102 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Job Post Calculator</title>
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="main.css">
 
 </head>
 <body>
 
 	<div class="container">
-	<form action="" id="jobTitlesForm">
+		<h1 class="page-header">So, you want to hire a llama.</h1>
 
-		<ol class="col-sm-6">
-			<li id="designerBool">
-				<h4>Does this job require design skills?</h4>
-				<div class="radio">
-					<label for="designerFalse">
-						<input name="designer" id="designerFalse" type="radio">
-						No
-					</label>
-				</div>
-				<div class="radio">
-					<label for="designerTrue">
-						<input name="designer" id="designerTrue" type="radio">
-						Yes
-					</label>
-				</div>
-			</li>
-			<li id="generalistLogic">
-				<h4>What is the nature of this role?</h4>
-				<div class="radio">
-					<label for="specialist">
-						<input name="generalist" id="specialist" type="radio">
-						Specialist
-					</label>
-				</div>
-				<div class="radio">
-					<label for="generalist">
-						<input name="generalist" id="generalist" type="radio">
-						Generalist
-					</label>
-				</div>
-			</li>
-			<li id="expLevel">
-				<h4>Does this job require design skills?</h4>
-				<div class="radio">
-					<label for="entryLevel">
-						<input value="Entry" name="level" id="entryLevel" type="radio">
-						Entry
-					</label>
-				</div>
-				<div class="radio">
-					<label for="midLevel">
-						<input value="Mid-Level" name="level" id="midLevel" type="radio">
-						Mid
-					</label>
-				</div>
-				<div class="radio">
-					<label for="seniorLevel">
-						<input value="Senior" name="level" id="seniorLevel" type="radio">
-						Senior
-					</label>
-				</div>
-			</li>
-			<li id="chooseSkillSet">
-				<h4>Select the skill set that best describes the role.</h4>
+		<form action="" id="jobTitlesForm">
 
-				<select name="skillSetSelect" class="form-control" id="skillSetSelect">
-					<!-- List generated based on above selections -->
-				</select>
+			<ol>
+				<li id="generalistLogic">
+					<h4>Are the tasks for this role very specific?</h4>
+					<div class="radio">
+						<label for="specialist">
+							<input name="generalist" id="specialist" type="radio">
+							Yes, specific part of the team
+						</label>
+					</div>
+					<div class="radio">
+						<label for="generalist">
+							<input name="generalist" id="generalist" type="radio">
+							No, they will do lots of things
+						</label>
+					</div>
+				</li>
+				<li id="expLevel">
+					<h4>What is the paygrade?</h4>
+					<div class="radio">
+						<label for="entryLevel">
+							<input value="Entry" name="level" id="entryLevel" type="radio">
+							&lt; $50k
+						</label>
+					</div>
+					<div class="radio">
+						<label for="midLevel">
+							<input value="Mid-Level" name="level" id="midLevel" type="radio">
+							$50k - $90k
+						</label>
+					</div>
+					<div class="radio">
+						<label for="seniorLevel">
+							<input value="Senior" name="level" id="seniorLevel" type="radio">
+							$90k +
+						</label>
+					</div>
+				</li>
+				<li id="designerBool">
+					<h4>Does this role require design skills?</h4>
+					<div class="radio">
+						<label for="designerTrue">
+							<input name="designer" id="designerTrue" type="radio">
+							Yes
+						</label>
+					</div>
+					<div class="radio">
+						<label for="designerFalse">
+							<input name="designer" id="designerFalse" type="radio">
+							No
+						</label>
+					</div>
+				</li>
+				
+				<li id="chooseSkillSet">
+					<h4>Select the skill set that best describes the role.</h4>
 
-			</li>
-		</ol>
+					<div class="col-sm-4 row">
+						<select name="skillSetSelect" class="form-control" id="skillSetSelect">
+							<!-- List generated based on above selections -->
+						</select>
+					</div>
+					<!-- whoops -->
+					<br>
+					<br>
+					<br>
+					<!-- /whoops -->
+				</li>
+			</ol>
 
-	</form>
+		</form>
+		
+		<h3>
+		<span class="result-holder" id="expLevelResult"></span>
+		<span class="result-holder" id="designerResult"></span>
+		<span class="result-holder" id="skillsResult"></span>
+		<span class="result-holder" id="generalistResult"></span>			
+		</h3>
+<!-- 
+		 <div id="roleDetails">
+			<textarea name="" class="form-control" cols="30" rows="10"></textarea>
+		</div> -->
+		
 	</div>
-	<div class="container">
-
-		<div class="panel">
-			<span id="designerResult"></span>
-			<span id="expLevelResult"></span>
-			<span id="generalistResult"></span>
-			<span id="skillsResult"></span>
-		</div>
-
-	</div>
-
 	
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="script.js"></script>

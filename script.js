@@ -1,26 +1,56 @@
 
 var skillSetArr = [];
 
+// Storing some data
+var skills = {
+	designer: {
+		general: ["Product", "Front-end"],
+		special: ["IA", "UX", "Graphic", "Content", "Animation"]
+	},
+	developer: {
+		general: ["Front-end", "Back-end", "Full-Stack"],
+		special: ["AngularJS", "HTML/CSS", "WordPress", "Rails", "Django"]
+	}
+}
 
 // Job Title Constructor Object Thing
-var JobTitle = function(isDesigner, expLevel, isGeneralist, skillSet) {
+var JobTitle = function(isDesigner, isDeveloper, expLevel, isGeneralist, skillSet) {
 	this.isDesigner = isDesigner;
+	this.isDeveloper = isDeveloper;
 	this.expLevel = expLevel;
 	this.isGeneralist = isGeneralist;
 	this.skillSet = skillSet;
 }
 
+// Update the skills array with some spaghetti logic
+// Ideally would only want this to run after the designer/dev question has been answered, I think.
+JobTitle.prototype.updateSkills = function() {
+	
+   	if (this.isDesigner) {
+   		if(this.isGeneralist) {
+			updateSkillSet(skills.designer.general);   		
+   		} else {
+			updateSkillSet(skills.designer.special);   		
+   		}
+   	} else {
+   		if(this.isGeneralist) {
+			updateSkillSet(skills.developer.general);
+		} else {
+			updateSkillSet(skills.developer.special);   		
+   		}
+   	}
+}
 
 // Function to run various callbacks when associated field changes
 JobTitle.prototype.onFieldChange = function(fieldId, callback) {
 	var field = document.getElementById(fieldId);
 	
 	// Update each field with the callback when it changes
-	// Oh, wow, is this a closure IRL?
-	field.addEventListener("change", function(e) {
-		updateSkillSet(); // TODO: dis be broke.
+	// Oh, wow, is this a closure IRL? Nice work, Larv.
+	field.addEventListener('change', function(e) {
 		return function() {
 			callback.apply(); // Do I need apply here?
+			title.updateSkills.apply(); 
 		}
 	}(this));
 }
@@ -32,13 +62,10 @@ var title = new JobTitle();
 
 // Update each field when it changes
 // Not great ID names, fwiw
-// This could be nicer also
+// This could be more concise, probably
 title.onFieldChange("designerBool", updateDesigner);
 title.onFieldChange("generalistLogic", updateGeneralist);
-title.onFieldChange("expLevel", updateExpLevel); // This also calls updateSkillSet
-// title.onFieldChange("expLevel", updateSkillSet); // Need to update skillset before you get to it - not ideal
-// Skills updating needs to happen all the time.
-
+title.onFieldChange("expLevel", updateExpLevel);
 
 
 
@@ -53,14 +80,18 @@ title.onFieldChange("expLevel", updateExpLevel); // This also calls updateSkillS
 // Is there a way to not hardcode these form values?
 function updateDesigner() {
 
+   	updateResult("skillsResult", "");
+
 	// Update the job title text and set a variable	
 	if(document.getElementById("designerTrue").checked) {
 
 		this.isDesigner = true;
+		this.isDeveloper = false;
 		document.getElementById("designerResult").innerHTML = "Designer";
 
 	} else if(document.getElementById("designerFalse").checked) {
 		
+		this.isDeveloper = true;
 		this.isDesigner = false;
 		document.getElementById("designerResult").innerHTML = "Developer";
 	
@@ -70,21 +101,15 @@ function updateDesigner() {
 
 
 // Generalist Logic
-// Set skill set array according to answer
 function updateGeneralist() {
-	
+
+   	updateResult("skillsResult", "");
+
 	if(document.getElementById("generalist").checked) {
 
 		// Update the job title
 		this.isGeneralist = true;
 	   	updateResult("generalistResult", "Generalist");
-		
-		// Set array according to designer or not
-		if(this.isDesigner) {
-			skillSetArr = ["UX", "Front-end", "Full-Stack"];
-		} else {
-			skillSetArr = ["Front-end", "Back-end", "Full-Stack"];
-		}
 
 	} else if(document.getElementById("specialist").checked) {
 		
@@ -92,18 +117,11 @@ function updateGeneralist() {
 		this.isGeneralist = false;
 	   	updateResult("generalistResult", "Specialist");
 
-		// Set array according to designer or not
-		if(this.isDesigner) {
-			skillSetArr = ["IA", "UX", "UI/Visual", "Content Strategy"];
-		} else {
-			skillSetArr = ["Back-end", "JavaScript", "HTML/CSS", "DevOps"];
-		}
-
 	}
 }
 
 
-// Update the skillset
+// Update the experience level
 function updateExpLevel() {
 
 	var container = document.getElementById("expLevel");
@@ -115,14 +133,12 @@ function updateExpLevel() {
 		}
 	};
 
-	// Get value of radio and put it in HMTL
-	// updateResult("expResult");
 }
 
 
 
 // Update the dropdown according to array of skills defined about
-function updateSkillSet() {
+function updateSkillSet(skillSetArr) {
 
 	// Clear the options - cleaner way to do this?
 	var skillSelect = document.getElementById("skillSetSelect");
@@ -146,7 +162,7 @@ function updateSkillSet() {
 	// Update the job title text when the selection is made
 	skillSelect.addEventListener('change', function() {
 	   	var value = skillSelect[skillSelect.selectedIndex].value;
-	   	updateResult('skillsResult', value);
+	   	updateResult("skillsResult", value);
 	});
 }
 
