@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,23 +11,23 @@
 <body>
 
 	<div class="container">
-		<h1 class="page-header">So, you want to hire a llama.</h1>
-
+		<h1 class="page-header">So, you want to hire a web person.</h1>
+		<p class="lead">This is a nice form to help you accurately communicate the role you are hiring for, and to help you articulate the needs within your company.</p>
+		
+		<h3>Title Calculator</h3>
 		<form action="" id="jobTitlesForm">
-
 			<ol>
 				<li id="generalistLogic">
-					<h4>Are the tasks for this role very specific?</h4>
+					<h4>Are you hiring for a very specific role?</h4>
+					<div class="help-block">e.g. for performance improvements (specific) vs. front-end developer (general)</div>
 					<div class="radio">
 						<label for="specialist">
-							<input name="generalist" id="specialist" type="radio">
-							Yes, specific part of the team
+							<input name="generalist" id="specialist" type="radio"> Yes, specific role
 						</label>
 					</div>
 					<div class="radio">
 						<label for="generalist">
-							<input name="generalist" id="generalist" type="radio">
-							No, they will do lots of things
+							<input name="generalist" id="generalist" type="radio"> No, they will do lots of things
 						</label>
 					</div>
 				</li>
@@ -36,71 +35,83 @@
 					<h4>What is the paygrade?</h4>
 					<div class="radio">
 						<label for="entryLevel">
-							<input value="Entry" name="level" id="entryLevel" type="radio">
-							&lt; $50k
+							<input value="Junior" name="level" id="entryLevel" type="radio"> &lt; $50k
 						</label>
 					</div>
 					<div class="radio">
 						<label for="midLevel">
-							<input value="Mid-Level" name="level" id="midLevel" type="radio">
-							$50k - $90k
+							<input value="Mid-Level" name="level" id="midLevel" type="radio"> $50k - $90k
 						</label>
 					</div>
 					<div class="radio">
 						<label for="seniorLevel">
-							<input value="Senior" name="level" id="seniorLevel" type="radio">
-							$90k +
+							<input value="Senior" name="level" id="seniorLevel" type="radio"> $90k +
 						</label>
 					</div>
 				</li>
 				<li id="designerBool">
-					<h4>Does this role require design skills?</h4>
+					<h4>What skills does this role mainly require?</h4>
 					<div class="radio">
 						<label for="designerTrue">
-							<input name="designer" id="designerTrue" type="radio">
-							Yes
+							<input name="designer" id="designerTrue" type="radio"> Design
 						</label>
 					</div>
+					<!-- Should there be another option here? Hybrid? Strategist? -->
 					<div class="radio">
 						<label for="designerFalse">
-							<input name="designer" id="designerFalse" type="radio">
-							No
+							<input name="designer" id="designerFalse" type="radio"> Development
 						</label>
 					</div>
 				</li>
-				
 				<li id="chooseSkillSet">
 					<h4>Select the skill set that best describes the role.</h4>
-
-					<div class="col-sm-4 row">
-						<select name="skillSetSelect" class="form-control" id="skillSetSelect">
-							<!-- List generated based on above selections -->
-						</select>
-					</div>
-					<!-- whoops -->
-					<br>
-					<br>
-					<br>
-					<!-- /whoops -->
+					<select name="skillSetSelect" class="form-control" id="skillSetSelect">
+						<!-- List generated based on above selections -->
+					</select>
 				</li>
 			</ol>
+		</form> <!-- /#jobTitleForm -->
 
-		</form>
-		
-		<h3>
-		<span class="result-holder" id="expLevelResult"></span>
-		<span class="result-holder" id="designerResult"></span>
-		<span class="result-holder" id="skillsResult"></span>
-		<span class="result-holder" id="generalistResult"></span>			
-		</h3>
-<!-- 
-		 <div id="roleDetails">
-			<textarea name="" class="form-control" cols="30" rows="10"></textarea>
-		</div> -->
-		
-	</div>
+		<div class="well">
+			<small class="text-uppercase">Job Title</small>
+			<h3>
+			<span class="greyed" id="generalistResult"></span>
+			<span id="expLevelResult"></span>
+			<span id="skillsResult"></span>
+			<span id="designerResult"></span>
+			</h3>
+		</div>
+
+		<h3>Description Calculator</h3>
+		<form action="" id="jobDescriptionForm">
+			<h4>What's in your stack?</h4>
+			<p>[some kind of picker here, options determined by above answers]</p>
+			<h4>Describe three specific, example tasks the candidate is expected to do.</h4>
+			
+			<div class="help-block">
+				<p><strong>Bad: </strong>Enhance our UI with JavaScript.</p>
+				<p><strong>Good:</strong> Our site has a rotating feed of tweets from live events. We want it to be so that the most recent tweet shows as soon as it is posted rather than added to the end of the queue.</p>
+			</div>
+
+			<textarea type="text" rows="3" class="form-control" id="task"></textarea>
+
+			<h4>Link to a file of code or a repo the new hire would be working with.</h4>
+			
+			<p class="help-block">This will give candidates a good idea of the desired level of skill in a specific language.</p>
+			
+			<input type="text" class="form-control">
+			
+			<h4>Company Information</h4>
+			<p class="help-block">Describe what your company does, its culture, and work environment. Keep the corporate fluff to a minimum.</p>
+			
+			<textarea type="text" rows="3" class="form-control" id="companyInfo"></textarea>
+		</form> <!-- /#jobDescriptionForm -->
+
+		<div class="well">
+			<small class="text-uppercase">Description</small>
+		</div>
+	</div> <!-- /container -->
 	
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="script.js"></script>
 </body>
 </html>

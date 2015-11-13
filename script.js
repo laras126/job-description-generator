@@ -4,18 +4,20 @@ var skillSetArr = [];
 // Storing some data
 var skills = {
 	designer: {
-		general: ["Product", "Front-end"],
+		general: ["Product", "Front-end", "Full-Stack"],
 		special: ["IA", "UX", "Graphic", "Content", "Animation"]
 	},
 	developer: {
 		general: ["Front-end", "Back-end", "Full-Stack"],
-		special: ["AngularJS", "HTML/CSS", "WordPress", "Rails", "Django"]
+		special: ["AngularJS", "WordPress", "Rails", "Django"]
 	}
 }
 
 // Job Title Constructor Object Thing
-var JobTitle = function(isDesigner, isDeveloper, expLevel, isGeneralist, skillSet) {
+// Designer/hybrid/dev needs to be consolidated into one value
+var JobTitle = function(isDesigner, isHybrid, isDeveloper, expLevel, isGeneralist, skillSet) {
 	this.isDesigner = isDesigner;
+	this.isDesigner = isHybrid;
 	this.isDeveloper = isDeveloper;
 	this.expLevel = expLevel;
 	this.isGeneralist = isGeneralist;
@@ -32,6 +34,8 @@ JobTitle.prototype.updateSkills = function() {
    		} else {
 			updateSkillSet(skills.designer.special);   		
    		}
+   	} else if (this.isHybrid) {	
+		updateSkillSet(skills.hybrid);
    	} else {
    		if(this.isGeneralist) {
 			updateSkillSet(skills.developer.general);
@@ -49,7 +53,7 @@ JobTitle.prototype.onFieldChange = function(fieldId, callback) {
 	// Oh, wow, is this a closure IRL? Nice work, Larv.
 	field.addEventListener('change', function(e) {
 		return function() {
-			callback.apply(); // Do I need apply here?
+			callback.apply();
 			title.updateSkills.apply(); 
 		}
 	}(this));
@@ -85,15 +89,24 @@ function updateDesigner() {
 	// Update the job title text and set a variable	
 	if(document.getElementById("designerTrue").checked) {
 
+		this.isHybrid = false;
 		this.isDesigner = true;
 		this.isDeveloper = false;
 		document.getElementById("designerResult").innerHTML = "Designer";
 
 	} else if(document.getElementById("designerFalse").checked) {
 		
+		this.isHybrid = false;
 		this.isDeveloper = true;
 		this.isDesigner = false;
 		document.getElementById("designerResult").innerHTML = "Developer";
+	
+	} else if(document.getElementById("designerHybrid").checked) {
+		
+		this.isDeveloper = true;
+		this.isDesigner = false;
+		this.isHybrid = true;
+		document.getElementById("designerResult").innerHTML = "Hybrid";
 	
 	}
 }
@@ -134,7 +147,6 @@ function updateExpLevel() {
 	};
 
 }
-
 
 
 // Update the dropdown according to array of skills defined about
